@@ -5,6 +5,9 @@ severstal-steel-defect-detection/
 extra_nbs/
 *.pth
 
+projsite/media/*
+projsite/detect/static/detect/img2.png
+archive/
 
 ###############################################################################
 

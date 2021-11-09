@@ -6,10 +6,13 @@
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
+
+<link rel="stylesheet" type="text/css" href="{% static 'detect/style.css' %}">
+
 <title>Upload image</title>
 
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="stylesheet" type="text/css" href="{% static 'detect/style.css' %}">
+
 
 <style id="" media="all">/* cyrillic-ext */
 @font-face {
@@ -190,7 +193,7 @@
 				font-family: Roboto, sans-serif;
 				color: #0f3c4b;
 				background-color: #e5edf1;
-				padding: 5rem 1.25rem; /* 80 20 */
+				/* padding: 5rem 1.25rem; /* 80 20 */ 
 			}
 
 			.container
@@ -411,14 +414,28 @@
 	</style>
 
 <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
-</head>
-<body>
-<div class="container" role="main">
-<font color="white">  
-<h1><b> Segmentation of defects in steel </b></h1>
-</font>
-<h1><a href="/article-url"></a></h1>
 
+
+
+</head>
+
+
+
+
+<body>
+
+<div class="topnav">
+	<a class="active" href={% url 'image_upload' %}>Home</a>
+	<a href="#about">About</a>
+</div>
+
+<!-- Header -->
+<header class="w3-blue w3-center w3-padding-32"> 
+	<h1><b>Segmentation of defects in steel	</b></h1>
+	<p> <b>ME6324 - AI for Manufacturing Project</span></b></p>
+</header>
+
+<div class="container" role="main">
 
 <br>
 

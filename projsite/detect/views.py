@@ -27,6 +27,10 @@ from segmentation_models_pytorch import Unet
 Note: I am aware that this breaks most (almost all) good practices for a website and Django.
 But this is a quick and dirty impl and I am not concerned about the performance right now
 :p
+
+TODO:
+- Move all inference code to a model
+- Async inference
 '''
 
 
@@ -74,6 +78,13 @@ colors = cl.scales['4']['qual']['Set3']
 labels = np.array(range(1,5))
 # combining into a dictionary
 palette = dict(zip(labels, np.array(cl.to_numeric(colors))))
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+
+patches = []
+for idx, color in palette.items():
+    patch = mpatches.Patch(color=color/255, label='class {}'.format(idx))
+    patches.append(patch)
 
 # initialize test dataloader
 best_threshold = 0.2
@@ -195,7 +206,12 @@ def inference(request):
     print(np.unique(final_mask, return_counts = True))
 
     final_img = visualise_mask(img_path=img_path, mask=final_mask)
+    plt.figure(figsize = (16, 3))
+    plt.legend(handles=patches)
+    plt.axis("off")
+    plt.imshow(final_img)
+    plt.savefig('./detect/static/detect/img2.png', bbox_inches='tight', transparent=True)
 
-    cv2.imwrite('./detect/static/detect/img2.png', final_img)
+    # cv2.imwrite('./detect/static/detect/img2.png', final_img)
     return render(request, 'result.html')
     # return redirect('result')        
