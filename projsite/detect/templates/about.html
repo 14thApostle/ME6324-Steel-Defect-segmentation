@@ -1,0 +1,106 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <title>About</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'detect/style.css' %}">      
+  
+  </head>
+  <body>
+    <style scoped>
+      .parent {
+        width: 100vw;
+      }
+  
+      p {
+        /* border: 1px dashed black; */
+        padding: 1em;
+        font-family: monospace;
+        color: white;
+        font-size: calc(0.6vw + 0.6em);
+        direction: ltr;
+        width: 90vw;
+        margin:auto;
+        text-align:justify;
+        word-break: break-word;
+        white-space: pre-line;
+        overflow-wrap: break-word;
+        -ms-word-break: break-word;
+        word-break: break-word;
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+  
+  
+      }
+    </style>
+    <div class="topnav">
+      <a class="active" href={% url 'image_upload' %}>Home</a>
+      <a class="inactive" href={% url 'validation' %}>Validation</a>
+      <a class="inactive" href={% url 'about' %}>About</a>
+    </div>
+
+
+    <!-- Header -->
+    <div class="w3-blue w3-center w3-padding-32">
+      <h1><b>About the project</b></h1>
+
+      
+    </header>
+
+    </div>
+    <div class="parent">
+        <p>
+      This website was created to work as a frontend for the project "Segmentation of faults in steel" that was created by our team for the course "Artificial Intelligence in Manufacturing" at the IIT Madras.
+      
+      The project was created by the following team members:
+         - Irfaan Arif - ME18B048                
+         - Shaloo Vardhini V - ME18B073          
+         - Sabari Krishna M   - ME18B071
+      </p>
+
+      <p>   
+        The aim of our project was to localise and classify surface defects on a steel sheet using various deep learning algorithms.
+        We employed semantic segmentation to successfully partition each digital image into multiple labelled segments which include 
+          - Pitted Surface
+          - Scratches
+          - Inclusion
+          - Rolled in scale
+        
+          <img src="{% static 'detect/images/m1.png' %}" class="center_img"/>
+        Our main evaluation metric is the Dice Coefficient which tracks the intersection over average area.
+        
+        The main dataset used for this project is the Severstal Steel defect dataset which is a publically available dataset on Kaggle. It can be found available at the following link: https://www.kaggle.com/c/severstal-steel-defect-detection/data
+      
+      </p>
+      
+        <p> 
+        The model we have trained is a standard U-Net, it uses resnet18 as the encoder network and a decoder network. The weights were pre-trained on the ImageNet dataset.
+        <img src="{% static 'detect/images/m2.png' %}" class="center_img"/>
+
+        We used a 80:20 train:test split to train our model. We used a standard binary cross-entropy loss function and the Adam optimizer.
+        We achieved a test score of 93.96% on the test set.
+        The training plots can be found below.
+        
+      </p>
+      <img src="{% static 'detect/images/loss.png' %}" class="center_img"/>
+      <br>
+      
+      <br>
+      <img src="{% static 'detect/images/dice_score.png' %}" class="center_img"/>
+      
+      </p>
+      Defect detection is one of the critical parts of manufacturing of a product in an industry. Manually inspecting the bulk production of steel sheets for defect detection is a tiresome task and could be prone to human errors. Analysis of the results show that the model we developed is promising for practical industry applications.
+      <p>  
+    </div>
+
+    <!-- </font> -->
+    <hr>
+
+
+  </body>
+</html>

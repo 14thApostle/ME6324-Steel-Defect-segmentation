@@ -112,6 +112,11 @@ model.load_state_dict(state["state_dict"])
 def home(request):    
     return render(request, 'index.html')
 
+def about(request):    
+    return render(request, 'about.html')
+
+def validation(request):    
+    return render(request, 'validation.html')
 
 def img_upload(request):
     # print("Hereeee form get")
@@ -195,14 +200,21 @@ def inference(request):
 
     predictions = []
     final_mask = []
+
+    cls_found = []
     for cls, pred in enumerate(preds[0]):
         pred, num = post_process(pred, best_threshold, min_size)
         final_mask.append(pred)
         name = os.path.basename(img_path) + f"_{cls+1}"
+        print("for cls", cls, np.unique(pred, return_counts = True))
         predictions.append([name, pred])
+        if 1 in list(np.unique(pred)):
+            cls_found.append(str(cls+1))
+
     final_mask = np.array(final_mask)
     final_mask = np.transpose(final_mask, (1,2, 0)).astype(np.uint8)
     print(final_mask.shape)
+    print("found classes", cls_found)
     print(np.unique(final_mask, return_counts = True))
 
     final_img = visualise_mask(img_path=img_path, mask=final_mask)
@@ -211,7 +223,11 @@ def inference(request):
     plt.axis("off")
     plt.imshow(final_img)
     plt.savefig('./detect/static/detect/img2.png', bbox_inches='tight', transparent=True)
-
+    if len(cls_found) == 0:
+        txt = "No defect found"
+    else:
+        txt = "Defect found of class type: {}".format(cls_found)
+    print(txt)
     # cv2.imwrite('./detect/static/detect/img2.png', final_img)
-    return render(request, 'result.html')
+    return render(request, 'result.html', {'txt': txt})
     # return redirect('result')        

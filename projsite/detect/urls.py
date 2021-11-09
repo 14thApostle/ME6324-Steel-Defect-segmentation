@@ -6,6 +6,8 @@ from detect import views
 urlpatterns = [
     # add these to configure our home page (default view) and result web page
     path('', views.img_upload, name='image_upload'),
+    path('about', views.about, name = 'about'),
+    path('validation', views.validation, name = 'validation'),
     path('result/', views.result, name='result'),
     path('success', views.success, name = 'success'),
 

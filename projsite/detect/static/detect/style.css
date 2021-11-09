@@ -46,3 +46,10 @@ body {
     background: white url("images/bkg2.gif") no-repeat center center fixed;
     background-size: cover;
 }
+
+.center_img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
