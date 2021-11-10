@@ -1,6 +1,7 @@
 *.rar
 imgs/
 severstal-steel-defect-detection/
+*.csv
 
 extra_nbs/
 *.pth
