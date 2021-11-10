@@ -1,0 +1,15 @@
+torch
+torchvision
+sklearn
+plotly
+albumentations==0.5.2
+colorlover==0.3.0
+Django==3.2.9
+matplotlib==3.3.4
+numpy==1.19.5
+opencv_python==4.5.3.56
+pandas==1.2.4
+segmentation_models_pytorch==0.2.0
+tqdm==4.62.3
+
+
