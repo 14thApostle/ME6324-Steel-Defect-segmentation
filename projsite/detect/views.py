@@ -151,7 +151,7 @@ def visualise_mask(img_path, mask):
     
     # reading in the image
     image = cv2.imread(img_path)
-
+    image = cv2.resize(image, (1600, 256))
     # going through the 4 layers in the last dimension 
     # of our mask with shape (256, 1600, 4)
     for index in range(mask.shape[-1]):
@@ -167,6 +167,7 @@ def visualise_mask(img_path, mask):
 
 def preprocess_input(img_path, transform):
     image = cv2.imread(img_path)
+    image = cv2.resize(image, (1600, 256))
     images = transform(image=image)["image"]
     return images
 
@@ -218,6 +219,8 @@ def inference(request):
     print(np.unique(final_mask, return_counts = True))
 
     final_img = visualise_mask(img_path=img_path, mask=final_mask)
+
+    print("saving image", final_img.shape)
     plt.figure(figsize = (16, 3))
     plt.legend(handles=patches)
     plt.axis("off")
